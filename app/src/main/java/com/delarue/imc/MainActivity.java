@@ -14,8 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     float peso;
     float altura;
-    String mensagem = "";
     float imc;
+    String mensagem = "";
+
 
 
     // Declaração de Objetos
@@ -32,15 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Setar (Apontar) os Objetos
 
-        editPeso = (EditText) findViewById(R.id.editPeso);
-        editAltura = (EditText) findViewById(R.id.editAltura);
-        txtResultado = (TextView) findViewById(R.id.txtResultado);
-        btnCalcular = (Button) findViewById(R.id.btnCalcular);
+        editPeso =  findViewById(R.id.editPeso);
+        editAltura =  findViewById(R.id.editAltura);
+        txtResultado =  findViewById(R.id.txtResultado);
+        txtDiagnostico =  findViewById(R.id.txtDiagnostico);
+        btnCalcular =  findViewById(R.id.btnCalcular);
 
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 // Recuperar os valores digitados
 
@@ -54,25 +58,25 @@ public class MainActivity extends AppCompatActivity {
                 if (imc < 17){
                     mensagem = "Muito Abaixo Do Peso";
 
-                }else if ((imc >=17)&& (imc < 18.5)){
+                }else if ((imc >= 17) && (imc < 18.5)){
 
                     mensagem = "Abaixo Do Peso";
 
-                }else if ((imc >=18.5)&& (imc < 25)){
+                }else if ((imc >= 18.5) && (imc < 25)){
 
                     mensagem = "Peso Ideal";
 
-                }else if ((imc >=25)&& (imc < 30)) {
+                }else if ((imc >= 25) && (imc < 30)) {
 
                     mensagem = "Acima Do Peso";
 
-                }else if ((imc >=30)&& (imc < 35)) {
+                }else if ((imc >= 30) && (imc < 35)) {
 
                     mensagem = "Obesidade Grau I";
 
-                }else if ((imc >=35)&& (imc < 40)) {
+                }else if ((imc >= 35) && (imc < 40)) {
 
-                    mensagem = "Obsidade Grau II";
+                    mensagem = "Obesidade Grau II";
 
                 }else {
 
