@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     // Declaração de vaiaveis
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     float imc;
     String mensagem = "";
 
+
+    // DecimalFormat dc = new DecimalFormat(0.00);?
 
 
     // Declaração de Objetos
