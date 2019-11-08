@@ -8,7 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
+import static java.lang.String.format;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     float imc;
     String mensagem = "";
 
-
-    // DecimalFormat dc = new DecimalFormat(0.00);?
 
 
     // Declaração de Objetos
@@ -90,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Mostrar o resultado
 
-                txtResultado.setText(String.valueOf(imc));
+                txtResultado.setText(format("%.2f",imc));
+
                 txtDiagnostico.setText(mensagem);
 
             }
 
-                });
+        });
     }
 }
