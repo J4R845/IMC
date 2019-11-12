@@ -15,14 +15,21 @@ import static java.lang.String.format;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText peso;
+    private EditText altura;
+    private TextView resultado;
+    private TextView diagnostico;
+    private DadosImcDAO dao;
+
     // Declaração de variaveis
 
-    float peso;
-    float altura;
+
     float imc;
     String mensagem = "";
-
     boolean dadosValidados;
+
+    float kilos;
+    float tamanho;
 
 
     // Declaração de Objetos
@@ -32,26 +39,52 @@ public class MainActivity extends AppCompatActivity {
     Button btnCalcular, btnSalvar;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Setar (Apontar) os Objetos
 
-        editPeso =  findViewById(R.id.editPeso);
-        editAltura =  findViewById(R.id.editAltura);
-        txtResultado =  findViewById(R.id.txtResultado);
-        txtDiagnostico =  findViewById(R.id.txtDiagnostico);
+        // Setar (Apontar) os Objetos
+        peso =  findViewById(R.id.editPeso);
+        altura =  findViewById(R.id.editAltura);
+        resultado =  findViewById(R.id.txtResultado);
+        diagnostico =  findViewById(R.id.txtDiagnostico);
+
+        dao = new DadosImcDAO(this);
+
         btnCalcular =  findViewById(R.id.btnCalcular);
         btnSalvar =  findViewById(R.id.btnSalvar);
 
 
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DadosImc d = new DadosImc();
+
+                d.setPeso(peso.getText().toString());
+                d.setAltura(altura.getText().toString());
+                d.setResultado(resultado.getText().toString());
+                d.setDiagnostico(diagnostico.getText().toString());
+
+                long id = dao.inserir(d);
+
+                Toast.makeText(getBaseContext(), "Dados Inseridos Com o ID: " + id, Toast.LENGTH_LONG).show();
+
+            }
+
+        });
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Setar (Apontar) os Objetos
+                editPeso =  findViewById(R.id.editPeso);
+                editAltura =  findViewById(R.id.editAltura);
+                txtResultado =  findViewById(R.id.txtResultado);
+                txtDiagnostico =  findViewById(R.id.txtDiagnostico);
 
                 try {
 
@@ -65,10 +98,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (dadosValidados) {
 
-                        peso = Float.parseFloat(editPeso.getText().toString());
-                        altura = Float.parseFloat(editAltura.getText().toString());
+                        kilos = Float.parseFloat(editPeso.getText().toString());
+                        tamanho = Float.parseFloat(editAltura.getText().toString());
 
-                        imc = peso / (altura * altura);
+
+                        imc = kilos / (tamanho * tamanho);
 
                         // Validação da IMC
 
@@ -104,29 +138,16 @@ public class MainActivity extends AppCompatActivity {
                         // Mostrar o resultado
 
                         txtResultado.setText(format("%.2f", imc));
-
                         txtDiagnostico.setText(mensagem);
 
                     }
 
                 }catch (Exception e){
 
-
                 }
 
-
             }
         });
-
-
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(getBaseContext(), "Nada Programado!!!", Toast.LENGTH_LONG).show();
-            }
-        });
-
 
     }
 
